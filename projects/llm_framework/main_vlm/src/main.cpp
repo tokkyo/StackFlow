@@ -141,7 +141,6 @@ class llm_task {
                     tokenizer_server_flage_ = true;
                     SLOGI("port_=%s model_id=%s content=%s", std::to_string(port_).c_str(), (base_model + "tokenizer").c_str(), ("'" + prompt_ + "'").c_str());
                     std::this_thread::sleep_for(std::chrono::seconds(10));
-                    // return -1;
                 }
             } else {
                 mode_config_.filename_tokenizer_model  = base_model + mode_config_.filename_tokenizer_model;

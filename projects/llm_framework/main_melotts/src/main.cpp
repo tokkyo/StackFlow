@@ -501,7 +501,7 @@ class llm_tts : public StackFlow {
                     llm_channel->subscriber_work_id(
                         "", std::bind(&llm_tts::task_user_data, this, llm_task_obj, llm_channel, std::placeholders::_1,
                                       std::placeholders::_2));
-                } else if (input.find("llm") != std::string::npos) {
+                } else if ((input.find("llm") != std::string::npos) || (input.find("vlm") != std::string::npos)) {
                     llm_channel->subscriber_work_id(input,
                                                     std::bind(&llm_tts::task_user_data, this, llm_task_obj, llm_channel,
                                                               std::placeholders::_1, std::placeholders::_2));
@@ -539,7 +539,7 @@ class llm_tts : public StackFlow {
         }
         auto llm_channel  = get_channel(work_id);
         auto llm_task_obj = llm_task_[work_id_num];
-        if (data.find("llm") != std::string::npos) {
+        if ((data.find("llm") != std::string::npos) || (data.find("vlm") != std::string::npos)) {
             ret = llm_channel->subscriber_work_id(
                 data, std::bind(&llm_tts::task_user_data, this, llm_task_obj, llm_channel, std::placeholders::_1,
                                 std::placeholders::_2));
