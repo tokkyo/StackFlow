@@ -133,14 +133,13 @@ class llm_task {
                         exit(1);
                     }
                     tokenizer_server_flage_ = true;
-                    // std::this_thread::sleep_for(std::chrono::seconds(10));
                     SLOGI("port_=%s model_id=%s content=%s", std::to_string(port_).c_str(), (base_model + "tokenizer").c_str(), ("'" + prompt_ + "'").c_str());
-                    return -1;
+                    std::this_thread::sleep_for(std::chrono::seconds(10));
                 }
             } else {
                 mode_config_.filename_tokenizer_model  = base_model + mode_config_.filename_tokenizer_model;
             }
-
+            SLOGI("filename_tokenizer_model: %s", mode_config_.filename_tokenizer_model.c_str());
             mode_config_.filename_tokens_embed     = base_model + mode_config_.filename_tokens_embed;
             mode_config_.filename_post_axmodel     = base_model + mode_config_.filename_post_axmodel;
             mode_config_.template_filename_axmodel = base_model + mode_config_.template_filename_axmodel;

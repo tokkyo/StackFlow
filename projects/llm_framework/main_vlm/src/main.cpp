@@ -50,6 +50,8 @@ class llm_task {
     task_callback_t out_callback_;
     bool enoutput_;
     bool enstream_;
+    std::atomic_bool tokenizer_server_flage_;
+    unsigned int port_ = 8080;
 
     void set_output(task_callback_t out_callback) {
         out_callback_ = out_callback;
@@ -122,6 +124,29 @@ class llm_task {
             CONFIG_AUTO_SET(file_body["mode_param"], b_dynamic_load_axmodel_layer);
             CONFIG_AUTO_SET(file_body["mode_param"], max_token_len);
 
+            if (mode_config_.filename_tokenizer_model.find("http:") != std::string::npos) {
+                if (!tokenizer_server_flage_) {
+                    pid_t pid = fork();
+                    if (pid == 0) {
+                        execl("/usr/bin/python3", "python3",
+                            ("/opt/m5stack/scripts/" + model_ + "_tokenizer.py").c_str(),
+                            "--host", "localhost",
+                            "--port", std::to_string(port_).c_str(),
+                            "--model_id", (base_model + "tokenizer").c_str(),
+                            "--content", ("'" + prompt_ + "'").c_str(),
+                            nullptr);
+                        perror("execl failed");
+                        exit(1);
+                    }
+                    tokenizer_server_flage_ = true;
+                    SLOGI("port_=%s model_id=%s content=%s", std::to_string(port_).c_str(), (base_model + "tokenizer").c_str(), ("'" + prompt_ + "'").c_str());
+                    std::this_thread::sleep_for(std::chrono::seconds(10));
+                    // return -1;
+                }
+            } else {
+                mode_config_.filename_tokenizer_model  = base_model + mode_config_.filename_tokenizer_model;
+            }
+            SLOGI("filename_tokenizer_model: %s", mode_config_.filename_tokenizer_model.c_str());
             mode_config_.filename_tokens_embed           = base_model + mode_config_.filename_tokens_embed;
             mode_config_.filename_post_axmodel           = base_model + mode_config_.filename_post_axmodel;
             mode_config_.filename_vpm_resampler_axmodedl = base_model + mode_config_.filename_vpm_resampler_axmodedl;
@@ -406,7 +431,6 @@ class llm_llm : public StackFlow {
         for (auto it = llm_task_obj->inputs_.begin(); it != llm_task_obj->inputs_.end();) {
             if (*it == data) {
                 it = llm_task_obj->inputs_.erase(it);
-                break;
             } else {
                 ++it;
             }
