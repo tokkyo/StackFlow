@@ -24,7 +24,6 @@ void load_default_config() {
     file.close();
 
     for (auto it = req_body.begin(); it != req_body.end(); ++it) {
-        // key_sql[(std::string)it.key()] = (std::string)it.value();
         if (req_body[it.key()].is_number()) {
             key_sql[(std::string)it.key()] = (int)it.value();
         }

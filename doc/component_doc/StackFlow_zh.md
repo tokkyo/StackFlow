@@ -406,7 +406,7 @@ int main(int argc, char *argv[]) {
 ```
 
 ## StackFlowUtil
-提供一个简便使用的 API：
+提供一些简便使用的函数：
 - sample_json_str_get: 简单的读取 json 内的键值函数，用于在不解析 json 对象的情况下快速读取 json 键值。
 - sample_get_work_id_num： 从 work_id 字符串中读取数字索引。
 - sample_get_work_id_name： 从 work_id 字符串中读取单元名。
@@ -414,5 +414,5 @@ int main(int argc, char *argv[]) {
 - sample_escapeString：简单的对字符串中的转义字符进行编码。
 - sample_unescapeString：简单的对字符串中的转义字符串进行解码。
 - decode_stream：解析流式数据流。
-- decode_base64：解码 base64
-- encode_base64：编码 base64
+- decode_base64：解码 base64 。
+- encode_base64：编码 base64 。

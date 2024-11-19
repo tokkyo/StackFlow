@@ -114,7 +114,7 @@ Example:
 ```
 
 ## unlink
-Unlink
+Unlink.
 
 Send JSON:
 ```json
@@ -203,7 +203,7 @@ Response JSON:
 error::code of 0 indicates successful execution.
 
 ## exit
-Exit the unit's work.
+Exit the unit.
 
 Send JSON:
 ```json
@@ -233,7 +233,7 @@ error::code of 0 indicates successful execution.
 
 ## Task Information
 
-Get task list:
+Get task list.
 
 Send JSON:
 ```json
@@ -261,7 +261,7 @@ Response JSON:
 }
 ```
 
-Get task runtime parameters:
+Get task runtime parameters.
 
 Send JSON:
 ```json

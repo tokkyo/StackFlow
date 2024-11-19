@@ -105,7 +105,7 @@ Example:
 ```
 
 ## unlink
-Unlink
+Unlink.
 
 Send json:
 ```json
@@ -224,7 +224,7 @@ error::code of 0 indicates successful execution.
 
 ## Task Information
 
-Get task list:
+Get task list.
 
 Send JSON:
 ```json
@@ -250,7 +250,7 @@ Response JSON:
 }
 ```
 
-Get task runtime parameters:
+Get task runtime parameters.
 
 Send JSON:
 ```json

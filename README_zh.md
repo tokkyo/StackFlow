@@ -1,6 +1,6 @@
 # Module-LLM
 
-<div class="product_pic"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/4.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/10.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/15.webp"></div>
+<div class="product_pic"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/4.webp" width="25%">
 
 ## 描述
 
@@ -66,15 +66,10 @@
 | 按键         | 用于升级固件进入下载模式                                                    |
 | 升级接口     | SD卡/Type C口                                                               |
 | 工作温度     | 0-40°C                                                                      |
-| 产品尺寸     | 54*54*13mm                                                                  |
-| 包装尺寸     | 133*95*16mm                                                                 |
+| 产品尺寸     | 54x54x13mm                                                                  |
+| 包装尺寸     | 133x95x16mm                                                                 |
 | 产品重量     | 17.4g                                                                       |
 | 包装重量     | 32.0g                                                                       |
-
-<div class="product_pic"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/11.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/5.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/12.webp"></div>
-
-<div class="product_pic"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/9.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/14.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/7.webp"></div>
-
 
 ## 相关链接
 
@@ -90,9 +85,9 @@
 
 >LLM Module引脚切换| LLM Module预留了引脚切换焊盘, 一些出现引脚复用冲突的情况下, 可以通过切割PCB线路然后跳线连接至其他组引脚。
 
-<img alt="module size" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/03.jpg" width="100%" />
+<img alt="module size" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/03.jpg" width="25%" />
 
-> 以`CoreS3`为例子，第一列（左绿色框）是串口通讯的TX引脚，用户根据需要四选一，（从上到下分别代表引脚G18 G7 G14 G10）,默认是IO18引脚，如需要切换其他引脚，切断焊盘连接线（红线处）（建议使用刀片切割），然后连接下面三个引脚之间的一个即可；第二列（右绿色框）是RX引脚切换，如上所述，也是四选一操作
+> 以`CoreS3`为例子，第一列（左绿色框）是串口通讯的TX引脚，用户根据需要四选一，（从上到下分别代表引脚G18 G7 G14 G10）,默认是IO18引脚，如需要切换其他引脚，切断焊盘连接线（红线处）（建议使用刀片切割），然后连接下面三个引脚之间的一个即可；第二列（右绿色框）是RX引脚切换，如上所述，也是四选一操作。
 
 
 

@@ -18,7 +18,6 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
-// #include <regex>
 #include <thread>
 
 #include <dirent.h>
@@ -46,7 +45,6 @@ void usr_print_error(const std::string &request_id, const std::string &work_id, 
     out_body["object"]     = std::string("None");
     out_body["data"]       = std::string("None");
     std::string out        = out_body.dump();
-    // printf("usr_print_error:%s\n", out.c_str());
     zmq_com_send(zmq_out, out);
 }
 
@@ -64,7 +62,6 @@ void usr_out(const std::string &request_id, const std::string &work_id, const T 
     out_body["data"]  = data;
     out_body["error"] = nlohmann::json::parse("{\"code\":0, \"message\":\"\"}");
     std::string out   = out_body.dump();
-    // printf("usr_print_error:%s\n", out.c_str());
     zmq_com_send(zmq_out, out);
 }
 
@@ -105,7 +102,7 @@ void get_memory_info(unsigned long *total_memory, unsigned long *free_memory) {
         }
         if (strncmp(line, "MemAvailable:", 13) == 0) {
             sscanf(line, "MemAvailable: %lu kB", free_memory);
-            break;  // Exit the loop when available memory information is found.
+            break;
         }
     }
     fclose(meminfo);
@@ -206,7 +203,6 @@ int sys_lsmode(int com_id, const nlohmann::json &json_obj) {
                     mode_body_list.push_back(mode_body);
                 } catch (const nlohmann::json::parse_error &e) {
                     SLOGW("%s json format error", (lsmode_dir + entry->d_name).c_str());
-                    // std::cerr << e.what() << '\n';
                 }
                 fclose(file);
             }
@@ -245,8 +241,6 @@ int sys_push(int com_id, const nlohmann::json &json_obj) {
     int stream         = false;
     int stream_size    = 512;
     std::string object = json_obj["object"];
-    // std::string data   = json_obj["data"];
-
     std::vector<std::string> object_fragment;
     std::string fragment;
     for (auto i = object.begin(); i != object.end(); i++) {
@@ -261,11 +255,6 @@ int sys_push(int com_id, const nlohmann::json &json_obj) {
 
     if (object_fragment.size() >= 3) stream = object_fragment[2] == "stream" ? true : false;
     if (object_fragment.size() >= 4) stream_size = std::stoi(object_fragment[3]);
-
-    // for (auto op: object_fragment)
-    // {
-    //     std::cout << op << "\n";
-    // }
 
     static std::string bash_str;
     if (stream) {
@@ -349,7 +338,6 @@ sys_upgrade_err_1:
 
 int _sys_bashexec(int com_id, std::string request_id, std::string work_id, std::string bashcmd, int stream,
                   int base64) {
-    // printf("_sys_bashexec %d\n", com_id);
     int out;
     int stream_size = 512;
     /****************************************************/
@@ -375,26 +363,19 @@ int _sys_bashexec(int com_id, std::string request_id, std::string work_id, std::
         tcgetattr(master_fd, &tty);
         tty.c_lflag &= ~ECHO;
         tcsetattr(master_fd, TCSANOW, &tty);
-
         bashcmd += " \r exit \r ";
-
-        // printf("bashexec:>>>>%s<<<<\n", bashcmd.c_str());
         write(master_fd, bashcmd.c_str(), bashcmd.length());
-        // bashcmd.clear();
-
         if (stream) {
             int index = 0;
             std::vector<char> _buffer(stream_size);
             char *buffer = _buffer.data();
             while ((nread = read(master_fd, buffer, stream_size - 1)) > 0) {
                 buffer[nread] = '\0';
-                // std::cout << process_out_buffer;
                 nlohmann::json delta_body;
                 delta_body["index"]  = index++;
                 delta_body["delta"]  = std::string(buffer);
                 delta_body["finish"] = false;
                 usr_out(request_id, work_id, delta_body, com_id);
-                // printf("stream end:%s--\n", buffer);
             }
             nlohmann::json delta_body;
             delta_body["index"]  = index++;
@@ -403,16 +384,11 @@ int _sys_bashexec(int com_id, std::string request_id, std::string work_id, std::
             usr_out(request_id, work_id, delta_body, com_id);
         } else {
             std::string process_out;
-            // subprocess_s process;
             char process_out_buffer[512];
             while ((nread = read(master_fd, process_out_buffer, sizeof(process_out_buffer) - 1)) > 0) {
                 process_out_buffer[nread] = '\0';
                 process_out += process_out_buffer;
-                // printf("end:%s-- %d\n", process_out_buffer, nread);
             }
-            // out_body["created"] = time(NULL);
-            // out_body["data"] = process_out;
-            // out_body["error"] = nlohmann::json::parse("{\"code\":0, \"message\":\"\"}");
             usr_out(request_id, work_id, process_out, com_id);
         }
         kill(pid, SIGKILL);
@@ -422,18 +398,13 @@ int _sys_bashexec(int com_id, std::string request_id, std::string work_id, std::
             std::cout << "Child process exited with status " << WEXITSTATUS(status) << std::endl;
         }
     }
-
     close(master_fd);
-
     /****************************************************/
 sys_bashexec_err_1:
-
-    // zmq_com_send(com_id, out_body.dump());
     return out;
 }
 
 int sys_bashexec(int com_id, const nlohmann::json &json_obj) {
-    // printf("sys_bashexec:--------\n");
     std::string request_id = json_obj["request_id"];
     std::string work_id    = json_obj["work_id"];
     std::string bashcmd;
@@ -474,7 +445,6 @@ int sys_reset(int com_id, const nlohmann::json &json_obj) {
     const char *cmd =
         "[ -f '/tmp/llm/reset.lock' ] || bash -c \"touch /tmp/llm/reset.lock ; sync ; sleep 1 ; systemctl restart "
         "llm-* \" > /dev/null 2>&1 & ";
-    // SLOGI("--------%s", cmd);
     system(cmd);
     return out;
 }
@@ -514,7 +484,6 @@ void server_stop_work() {
 
 typedef int (*sys_fun_call)(int, const nlohmann::json &);
 void unit_action_match(int com_id, const std::string &json_str) {
-    // printf("unit_action_match:%s\n", json_str.c_str());
     int ret;
     std::string out_str;
     nlohmann::json req_body;
@@ -546,7 +515,6 @@ void unit_action_match(int com_id, const std::string &json_str) {
 
     if ((work_id_fragment.size() > 0) && (work_id_fragment[0] == "sys")) {
         std::string unit_action = "sys." + action;
-        // printf("unit_action:----%s-----\n", unit_action.c_str());
         sys_fun_call call_fun = NULL;
         SAFE_READING(call_fun, sys_fun_call, unit_action);
         if (call_fun)

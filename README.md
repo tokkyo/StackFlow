@@ -1,6 +1,6 @@
 # Module-LLM
 
-<div class="product_pic"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/4.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/10.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/15.webp"></div>
+<div class="product_pic"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/4.webp" width="25%">
 
 ## Description
 
@@ -53,14 +53,11 @@ Plug and play with **M5 hosts**, Module LLM offers an easy-to-use AI interaction
 | Button           | For entering download mode for firmware upgrade                                             |
 | Upgrade Port     | SD card / Type-C port                                                                       |
 | Working Temp     | 0-40°C                                                                                      |
-| Product Size     | 54*54*13mm                                                                                  |
-| Packaging Size   | 133*95*16mm                                                                                 |
+| Product Size     | 54x54x13mm                                                                                  |
+| Packaging Size   | 133x95x16mm                                                                                 |
 | Product Weight   | 17.4g                                                                                       |
 | Packaging Weight | 32.0g                                                                                       |
 
-<div class="product_pic"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/11.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/5.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/12.webp"></div>
-
-<div class="product_pic"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/9.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/14.webp"><img class="pic" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/7.webp"></div>
 
 ## Related Links
 
@@ -76,7 +73,7 @@ Plug and play with **M5 hosts**, Module LLM offers an easy-to-use AI interaction
 
 >LLM Module Pin Switching| LLM Module has reserved soldering pads for pin switching. In cases of pin multiplexing conflicts, the PCB trace can be cut and reconnected to other sets of pins.
 
-<img alt="module size" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/03.jpg" width="100%" />
+<img alt="module size" src="https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/products/module/Module%20LLM/03.jpg" width="25%" />
 
 > Taking `CoreS3` as an example, the first column (left green box) is the TX pin for serial communication, where users can choose one out of four options as needed (from top to bottom, the pins are G18, G7, G14, and G10). The default is set to IO18. To switch to a different pin, cut the connection on the solder pad (at the red line) — it’s recommended to use a blade for this — and then connect to one of the three remaining pins below. The second column (right green box) is for RX pin selection, and, as with the TX pin, it also allows a choice of one out of four options.
 

@@ -26,7 +26,7 @@ scons -j22
 
 
 ## assistant mode
-llm-sys llm-audio llm-kws llm-asr llm-llm llm-melotts Collaborative work。
+llm-sys llm-audio llm-kws llm-asr llm-llm llm-melotts Collaborative work.
 
 Chinese environment:
 

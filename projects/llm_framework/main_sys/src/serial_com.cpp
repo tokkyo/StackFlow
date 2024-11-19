@@ -21,7 +21,6 @@
 
 #include "all.h"
 #include "event_loop.h"
-// #include "zmq.h"
 #include "zmq_bus.h"
 #include "linux_uart/linux_uart.h"
 #include <memory>
@@ -130,9 +129,7 @@ void serial_work() {
         out_str += ",\"error\":{\"code\":0, \"message\":\"reset over\"}}";
         serial_con_->send_data(out_str);
     }
-
     sync();
-    // printf("serial port:%d\n", port);
 }
 
 void serial_stop_work() {

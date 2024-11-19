@@ -5,7 +5,6 @@
  */
 #include "StackFlow.h"
 #include "sherpa-ncnn/csrc/recognizer.h"
-// #include "sherpa-sherpa_ncnn/csrc/wave-reader.h"
 
 #include <iostream>
 #include <signal.h>
@@ -15,7 +14,6 @@
 #include <base64.h>
 #include <fstream>
 #include <stdexcept>
-// #define CONFIG_SAMPLE_LOG_LEVEL_EXPORT
 #include "../../../../SDK/components/utilities/include/sample_log.h"
 
 #define BUFFER_IMPLEMENTATION
@@ -111,7 +109,6 @@ class llm_task {
             }
             std::string base_model = base_model_path_ + model_ + "/";
             SLOGI("base_model %s", base_model.c_str());
-            // sherpa_ncnn::RecognizerConfig config;
 
             CONFIG_AUTO_SET(file_body["mode_param"], feat_config.sampling_rate);
             CONFIG_AUTO_SET(file_body["mode_param"], feat_config.feature_dim);
@@ -166,7 +163,6 @@ class llm_task {
             mode_config_.model_config.decoder_bin   = base_model + mode_config_.model_config.decoder_bin;
             mode_config_.model_config.joiner_param  = base_model + mode_config_.model_config.joiner_param;
             mode_config_.model_config.joiner_bin    = base_model + mode_config_.model_config.joiner_bin;
-            // std::cout << mode_config_.ToString() << "\n";
             recognizer_ = std::make_unique<sherpa_ncnn::Recognizer>(mode_config_);
         } catch (...) {
             SLOGE("config false");
@@ -180,14 +176,12 @@ class llm_task {
     }
 
     void sys_pcm_on_data(const std::string &raw) {
-        // std::cout << "sys_pcm_on_data 1\n";
         static int count = 0;
         if (count < delay_audio_frame_) {
             buffer_write_char(pcmdata, raw.c_str(), raw.length());
             count++;
             return;
         }
-        // std::cout << "sys_pcm_on_data 2\n";
         buffer_write_char(pcmdata, raw.c_str(), raw.length());
         buffer_position_set(pcmdata, 0);
         count = 0;
@@ -196,12 +190,10 @@ class llm_task {
             int16_t audio_val;
             while (buffer_read_u16(pcmdata, (unsigned short *)&audio_val, 1)) {
                 float normalizedSample = (float)audio_val / INT16_MAX;
-                // std::cout << normalizedSample;
                 floatSamples.push_back(normalizedSample);
             }
         }
         buffer_position_set(pcmdata, 0);
-        // std::cout << "sys_pcm_on_data 3\n";
         if (awake_flage_ && recognizer_stream_) {
             recognizer_stream_.reset();
             awake_flage_ = false;
@@ -218,7 +210,6 @@ class llm_task {
         std::string lower_text;
         lower_text.resize(text.size());
         std::transform(text.begin(), text.end(), lower_text.begin(), [](const char c) { return std::tolower(c); });
-        // std::cout << lower_text << "\n";
         if ((!lower_text.empty()) && out_callback_) out_callback_(lower_text, false);
         bool is_endpoint = recognizer_->IsEndpoint(recognizer_stream_.get());
         if (is_endpoint) {
@@ -234,13 +225,10 @@ class llm_task {
         }
     }
 
-    // bool pause() {
-    //     // lLaMa_->Stop();
-    //     return true;
-    // }
     void kws_awake() {
         awake_flage_ = true;
     }
+
     bool delete_model() {
         recognizer_.reset();
         return true;
@@ -295,7 +283,6 @@ class llm_asr : public StackFlow {
 
     void task_output(const std::shared_ptr<llm_task> llm_task_obj, const std::shared_ptr<llm_channel_obj> llm_channel,
                      const std::string &data, bool finish) {
-        // SLOGI("send:%s", data.c_str());
         std::string tmp_msg1;
         const std::string *next_data = &data;
         if (finish) {
@@ -564,7 +551,7 @@ class llm_asr : public StackFlow {
 
     void taskinfo(const std::string &work_id, const std::string &object, const std::string &data) override {
         SLOGI("llm_asr::taskinfo:%s", data.c_str());
-        // int ret = 0;
+        
         nlohmann::json req_body;
         int work_id_num = sample_get_work_id_num(work_id);
         if (WORK_ID_NONE == work_id_num) {

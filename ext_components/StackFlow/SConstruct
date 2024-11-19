@@ -18,14 +18,9 @@ if 'CONFIG_STACKFLOW_ENABLED' in os.environ:
 
     SRCS += Glob('stackflow/*.cpp')
     INCLUDE.append(ADir("stackflow"))
-    PRIVATE_INCLUDE.append(ADir("stackflow"))
     PRIVATE_INCLUDE.append(ADir("stackflow/libzmq"))
 
     REQUIREMENTS += ['eventpp', 'utilities', 'zmq']
-    
-    # STATIC_LIB += [
-    #      AFile("uintv2_ncnn/lib/libncnn.a")
-    # ]
 
     env['COMPONENTS'].append({'target':os.path.basename(env['component_dir']),
                             'SRCS':SRCS,

@@ -21,9 +21,7 @@
 #include <vector>
 #include <string.h>
 #include <samplerate.h>
-// #define CONFIG_SAMPLE_LOG_LEVEL_EXPORT
 #include "../../../../SDK/components/utilities/include/sample_log.h"
-
 #include "subprocess.h"
 
 using namespace StackFlows;
@@ -198,15 +196,8 @@ class llm_task {
         out_callback_ = out_callback;
     }
 
-    bool delete_model() {
-        // synthesizer_.reset();
-        return true;
-    }
-
     void resample_audio(float *input_buffer, int input_length, float *output_buffer, int *output_length,
                         double src_ratio) {
-        // Define resampling rate.
-        // double src_ratio = 16000.0 / 44100.0;
         SRC_STATE *src_state;
         int error;
         src_state = src_new(SRC_SINC_FASTEST, 1, &error);
@@ -276,7 +267,6 @@ class llm_task {
                     pcmlist.reserve(pcmlist.size() + decoder_output.size());
                     std::copy(decoder_output.begin(), decoder_output.end(), std::back_inserter(pcmlist));
                 }
-                // pcmlist.insert(pcmlist.end(), decoder_output.begin(), decoder_output.begin() + actual_size);
             }
             double src_ratio = (mode_config_.audio_rate * 1.0f) / (mode_config_.mode_rate * 1.0f);
             std::vector<float> tmp_pcm((pcmlist.size() * src_ratio + 1));
@@ -311,7 +301,6 @@ class llm_task {
             }
             AX_ENGINE_NPU_ATTR_T npu_attr;
             memset(&npu_attr, 0, sizeof(npu_attr));
-            // npu_attr.eHardMode = AX_ENGINE_VIRTUAL_NPU_DISABLE;
             ret = AX_ENGINE_Init(&npu_attr);
             if (0 != ret) {
                 fprintf(stderr, "Init ax-engine failed{0x%8x}.\n", ret);
@@ -369,7 +358,6 @@ class llm_tts : public StackFlow {
 
     void task_output(const std::shared_ptr<llm_task> llm_task_obj, const std::shared_ptr<llm_channel_obj> llm_channel,
                      const std::string &data, bool finish) {
-        // SLOGI("send:%s", data.c_str());
         std::string base64_data;
         int len = encode_base64(data, base64_data);
         if (llm_channel->enstream_) {
@@ -382,10 +370,8 @@ class llm_tts : public StackFlow {
                 data_body["delta"] = std::string("");
             data_body["finish"] = finish;
             if (finish) count = 0;
-            // SLOGI("send stream");
             llm_channel->send(llm_task_obj->response_format_, data_body, LLM_NO_ERROR);
         } else if (finish) {
-            // SLOGI("send utf-8");
             llm_channel->send(llm_task_obj->response_format_, base64_data, LLM_NO_ERROR);
         }
         if (llm_task_obj->response_format_.find("sys") != std::string::npos) {
@@ -406,7 +392,6 @@ class llm_tts : public StackFlow {
         int ret;
         std::string tmp_msg1;
         if (enstream) {
-            // int index          = std::stoi(sample_json_str_get((*next_data), "index"));
             std::string finish = sample_json_str_get((*next_data), "finish");
             tmp_msg1           = sample_json_str_get((*next_data), "delta");
             finish_flage       = (finish == "true") ? true : false;
@@ -590,7 +575,6 @@ class llm_tts : public StackFlow {
 
     void taskinfo(const std::string &work_id, const std::string &object, const std::string &data) override {
         SLOGI("llm_melotts::taskinfo:%s", data.c_str());
-        // int ret = 0;
         nlohmann::json req_body;
         int work_id_num = sample_get_work_id_num(work_id);
         if (WORK_ID_NONE == work_id_num) {

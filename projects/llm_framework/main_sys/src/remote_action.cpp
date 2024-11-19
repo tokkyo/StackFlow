@@ -5,7 +5,6 @@
  */
 #include "all.h"
 #include <string>
-// #include "cstr.h"
 #include "remote_action.h"
 #include "pzmq.hpp"
 #include "json.hpp"
@@ -26,7 +25,6 @@ int remote_call(int com_id, const std::string &json_str) {
     send_data += "\",\"raw_data\":\"";
     send_data += sample_escapeString(json_str);
     send_data += "\"}";
-    // printf("work_unit:%s action:%s send_data:%s\n", work_unit.c_str(), action.c_str(), send_data.c_str());
     pzmq clent(work_unit);
     return clent.call_rpc_action(action, send_data, [](const std::string &val) {});
 }

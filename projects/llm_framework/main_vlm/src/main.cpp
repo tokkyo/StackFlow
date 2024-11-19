@@ -13,7 +13,6 @@
 #include <base64.h>
 #include <fstream>
 #include <stdexcept>
-// #define CONFIG_SAMPLE_LOG_LEVEL_EXPORT
 #include "../../../../SDK/components/utilities/include/sample_log.h"
 
 using namespace StackFlows;
@@ -180,9 +179,7 @@ class llm_task {
                 oss_prompt << input << " ";
                 break;
             case TKT_Qwen:
-                // oss_prompt << "<|im_start|>system\nYou are a helpful assistant.<|im_end|>";
                 oss_prompt << "<|im_start|>system\n" << prompt_ << ".<|im_end|>";
-                // oss_prompt << "<|im_start|>" << role << "\n" << content << "<|im_end|>\n";
                 oss_prompt << "\n<|im_start|>user\n" << input << "<|im_end|>\n<|im_start|>assistant\n";
                 break;
             case TKT_HTTP:
@@ -439,7 +436,6 @@ class llm_llm : public StackFlow {
 
     void taskinfo(const std::string &work_id, const std::string &object, const std::string &data) override {
         SLOGI("llm_llm::taskinfo:%s", data.c_str());
-        // int ret = 0;
         nlohmann::json req_body;
         int work_id_num = sample_get_work_id_num(work_id);
         if (WORK_ID_NONE == work_id_num) {

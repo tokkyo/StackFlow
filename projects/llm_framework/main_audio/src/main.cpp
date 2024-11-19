@@ -12,7 +12,6 @@
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
-// #define CONFIG_SAMPLE_LOG_LEVEL_EXPORT
 #include "../../../../SDK/components/utilities/include/sample_log.h"
 
 int main_exit_flage = 0;
@@ -336,7 +335,6 @@ class llm_audio : public StackFlow {
     }
 
     std::string parse_data(const std::string &object, const std::string &data) {
-        // printf("parse_data:%s  %s", object.c_str(), data.c_str());
         std::string _data;
         bool s   = (object.find("stream") == std::string::npos) ? false : true;
         bool wav = (object.find("wav") == std::string::npos) ? false : true;
@@ -359,7 +357,6 @@ class llm_audio : public StackFlow {
     std::string play(const std::string &rawdata) {
         if (rawdata.size() < 3) return LLM_NONE;
         if ((rawdata[0] == '{') && (rawdata[rawdata.size() - 1] == '}')) {
-            // std::string zmq_com = sample_json_str_get(rawdata, "zmq_com");
             std::string src_data = sample_unescapeString(sample_json_str_get(rawdata, "raw_data"));
             return parse_data(sample_json_str_get(src_data, "object"), sample_json_str_get(src_data, "data"));
         } else {
@@ -413,7 +410,6 @@ class llm_audio : public StackFlow {
 
     std::string queue_play_stop(const std::string &rawdata) {
         audio_clear_flage_ = true;
-        // event_queue_.clearEvents();
         return LLM_NONE;
     }
 

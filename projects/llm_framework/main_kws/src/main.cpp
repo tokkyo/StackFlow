@@ -15,7 +15,6 @@
 #include <fstream>
 #include <stdexcept>
 #include <thread_safe_list.h>
-// #define CONFIG_SAMPLE_LOG_LEVEL_EXPORT
 #include "../../../../SDK/components/utilities/include/sample_log.h"
 
 #define BUFFER_IMPLEMENTATION
@@ -226,15 +225,11 @@ class llm_task {
         }
         sherpa_onnx::KeywordResult r = spotter_->GetResult(spotter_stream_.get());
         if (!r.keyword.empty()) {
-            // todo:
             if (enwake_audio_ && (!wake_wav_file_.empty()) && play_awake_wav) {
                 play_awake_wav(wake_wav_file_);
             }
             if (out_callback_) {
-                // if(response_format_ == "kws.bool")
-                // {
                 out_callback_("True");
-                // }
             }
         }
     }
@@ -433,7 +428,6 @@ class llm_kws : public StackFlow {
 
     void taskinfo(const std::string &work_id, const std::string &object, const std::string &data) override {
         SLOGI("llm_kws::taskinfo:%s", data.c_str());
-        // int ret = 0;
         nlohmann::json req_body;
         int work_id_num = sample_get_work_id_num(work_id);
         if (WORK_ID_NONE == work_id_num) {

@@ -406,7 +406,7 @@ int main(int argc, char *argv[]) {
 ```
 
 ## StackFlowUtil
-Provides a convenient API:
+Provide some simple and easy-to-use functions:
 - sample_json_str_get: Simple function to read key values inside a JSON, used to quickly read JSON keys without parsing the JSON object.
 - sample_get_work_id_num: Read the numeric index from the work_id string.
 - sample_get_work_id_name: Read the unit name from the work_id string.

@@ -7,7 +7,6 @@
 #include "zmq_bus.h"
 
 #include "all.h"
-// #include <zmq.h>
 #include <stdbool.h>
 #include <functional>
 #include <cstring>
@@ -22,8 +21,6 @@ zmq_bus_com::zmq_bus_com() {
 }
 
 void zmq_bus_com::work(const std::string &zmq_url_format, int port) {
-    // printf("zmq_url_format:%s port:%d\n", zmq_url_format.c_str(), port);
-
     _port             = port;
     exit_flage        = 1;
     std::string ports = std::to_string(port);
@@ -31,7 +28,6 @@ void zmq_bus_com::work(const std::string &zmq_url_format, int port) {
     sprintf((char *)buff.data(), zmq_url_format.c_str(), port);
     _zmq_url = std::string((char *)buff.data());
     SAFE_SETTING("serial_zmq_url", _zmq_url);
-    // printf("_zmq_url:%s\n", _zmq_url.c_str());
     user_chennal_ =
         std::make_unique<pzmq>(_zmq_url, ZMQ_PULL, std::bind(&zmq_bus_com::send_data, this, std::placeholders::_1));
     reace_data_event_thread = std::make_unique<std::thread>(std::bind(&zmq_bus_com::reace_data_event, this));
@@ -44,7 +40,6 @@ void zmq_bus_com::stop() {
 }
 
 void zmq_bus_com::on_data(const std::string &data) {
-    // printf("on_data port:%d\n", _port);
     unit_action_match(_port, data);
 }
 
@@ -105,8 +100,6 @@ void zmq_com_send(int com_id, const std::string &out_str) {
     pzmq _zmq(zmq_push_url, ZMQ_PUSH);
     _zmq.send_data(out_str);
 }
-
-// ubus call sys sql_select '{"key": "work_id.1001.out_port"}'
 
 void zmq_bus_work() {
 }

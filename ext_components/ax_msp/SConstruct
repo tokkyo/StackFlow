@@ -58,11 +58,6 @@ if 'CONFIG_AX_620E_MSP_ENABLED' in os.environ:
     INCLUDE += [os.path.join(MSP_PATH, 'out/arm64_glibc/include'), os.path.join(MSP_PATH, 'sample/common')]
     LINK_SEARCH_PATH += [os.path.join(MSP_PATH, 'out/arm64_glibc/lib')]
     REQUIREMENTS += ['dl', 'm', 'pthread']
-    
-    # REQUIREMENTS += ['ax_sys', 'ax_mipi', 'ax_proton', 'ax_engine','ax_interpreter','ax_ae','ax_awb','ax_af',
-    #                 'ax_nt_stream', 'ax_venc', 'ax_ivps', 'ax_vdec', 'ax_nt_stream', 'ax_nt_ctrl', 'ax_ive', 'ax_audio', 'ax_opal', 'ax_fdk',
-    #                 'ax_ives', 'ax_skel', 'ax_audio_3a', 'ax_opus', 'ax_opal', 'ax_audio']
-
     third_party = ['cmdline','drm','faac','fdk-aac','ffmpeg','libsamplerate','live','mp4','opencv','openssl','optee','opus','swupdate','tinyalsa']
     for dirn in third_party:
         INCLUDE.append(os.path.join(MSP_PATH,'third-party',dirn,'include'))

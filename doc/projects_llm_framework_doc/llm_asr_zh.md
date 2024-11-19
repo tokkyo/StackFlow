@@ -2,7 +2,7 @@
 语音转文字单元，用于提供语音转文字服务，可选择中英文模型，用于提供中英文语音转文字服务。  
 
 ## setup
-配置单元工作.
+配置单元工作。
 
 发送 json：
 ```json
@@ -36,6 +36,7 @@
 - endpoint_config.rule1.min_trailing_silence：唤醒后 2.4 s 后语音产生断点。
 - endpoint_config.rule2.min_trailing_silence：识别语音后停顿 1.2 s 后语音产生断点。
 - endpoint_config.rule3.min_trailing_silence：最长能够识别 30.1 s 后语音产生断点。
+
 响应 json：
 
 ```json
@@ -88,7 +89,7 @@ error::code 为 0 表示执行成功。
 
 将 asr 和 kws 单元链接起来，当 kws 发出唤醒数据时，asr 单元开始识别用户的语音，识别完成后自动暂停，直到下一次的唤醒。
 
-> **link时必须保证 kws 此时已经配置好进入工作状态。link 也可以在 setup 阶段进行。**
+> **link 时必须保证 kws 此时已经配置好进入工作状态。link 也可以在 setup 阶段进行。**
 
 示例:
 
@@ -114,7 +115,7 @@ error::code 为 0 表示执行成功。
 ```
 
 ## unlink
-取消链接
+取消链接。
 
 发送 json：
 ```json
@@ -175,7 +176,7 @@ error::code 为 0 表示执行成功。
 error::code 为 0 表示执行成功。
 
 ## work
-恢复单元工作.
+恢复单元工作。
 
 发送 json：
 ```json
@@ -204,7 +205,7 @@ error::code 为 0 表示执行成功。
 error::code 为 0 表示执行成功。
 
 ## exit
-恢复单元工作.
+单元退出。
 
 发送 json：
 ```json
@@ -234,7 +235,7 @@ error::code 为 0 表示执行成功。
 
 ## taskinfo
 
-获取任务列表：
+获取任务列表。
 
 发送 json：
 ```json
@@ -263,7 +264,7 @@ error::code 为 0 表示执行成功。
 }
 ```
 
-获取任务运行参数：
+获取任务运行参数。
 
 ```json
 {

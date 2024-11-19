@@ -4,7 +4,6 @@
 #include "ax_adec_api.h"
 #include "ax_audio_process.h"
 #include "ax_sys_api.h"
-// #include "wave_parser.h"
 #include "ax_ai_api.h"
 #include "ax_ao_api.h"
 #include "ax_global_type.h"
@@ -52,11 +51,9 @@ void ax_play(unsigned int card, unsigned int device, float Volume, int channel, 
 void ax_set_play(unsigned int card, unsigned int device, float Volume, int channel, int rate, int bit);
 void ax_play_continue(const void *data, int size);
 void ax_close_play();
-
 void ax_cap_start(unsigned int card, unsigned int device, float Volume, int channel, int rate, int bit,
                   AUDIOCallback callback);
 void ax_close_cap();
-
 int ax_play_status();
 int ax_cap_status();
 

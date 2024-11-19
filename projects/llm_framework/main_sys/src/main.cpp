@@ -25,7 +25,6 @@
 #include "backward.h"
 #endif
 
-// #include "hv/hlog.h"
 pthread_spinlock_t key_sql_lock;
 std::unordered_map<std::string, Any> key_sql;
 std::string zmq_s_format;
@@ -133,9 +132,7 @@ void all_work() {
     server_work();
     remote_server_work();
     remote_action_work();
-    // ubus_work();
     zmq_bus_work();
-
     serial_work();
     int enable_tcp = 0;
     SAFE_READING(enable_tcp, int, "config_enable_tcp");
@@ -148,10 +145,8 @@ void all_stop_work() {
 
     if (enable_tcp) tcp_stop_work();
     serial_stop_work();
-
     remote_server_stop_work();
     remote_action_stop_work();
-    // ubus_stop_work();
     zmq_bus_stop_work();
 }
 
@@ -159,7 +154,6 @@ void all_work_check() {
 }
 
 int main(int argc, char *argv[]) {
-    // signal(SIGPIPE, SIG_IGN);
     signal(SIGTERM, __sigint);
     signal(SIGINT, __sigint);
     mkdir("/tmp/llm", 0777);

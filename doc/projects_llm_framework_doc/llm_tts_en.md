@@ -27,6 +27,7 @@ Send JSON:
 - response_format: The returned result is `sys.pcm`, system audio data, which is directly sent to the llm-audio module for playback.
 - input: Input is `tts.utf-8`, representing user input.
 - enoutput: Whether to enable user result output.
+
 Response JSON:
 
 ```json
@@ -99,7 +100,7 @@ Example:
 ```
 
 ## unlink
-Unlink
+Unlink.
 
 Send JSON:
 ```json
@@ -188,7 +189,7 @@ Response JSON:
 error::code 0 indicates successful execution.
 
 ## exit
-Exit unit work.
+Exit the unit.
 
 Send JSON:
 ```json
@@ -218,7 +219,7 @@ error::code 0 indicates successful execution.
 
 ## Task Information
 
-Get task list:
+Get task list.
 
 Send JSON:
 ```json
@@ -244,7 +245,7 @@ Response JSON:
 }
 ```
 
-Get task runtime parameters:
+Get task runtime parameters.
 
 Send JSON:
 ```json
@@ -275,5 +276,5 @@ Response JSON:
 }
 ```
 
-> **Note: work_id increases according to the order of unit initialization registration and is not a fixed index value.**
+> **Note: work_id increases according to the order of unit initialization registration and is not a fixed index value.**  
 > **The same type of unit cannot have multiple units working simultaneously, as it may cause unknown errors. For example, tts and melo tts cannot be enabled to work at the same time.**

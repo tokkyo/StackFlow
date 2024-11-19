@@ -14,7 +14,6 @@
 #include <base64.h>
 #include <fstream>
 #include <stdexcept>
-// #define CONFIG_SAMPLE_LOG_LEVEL_EXPORT
 #include "../../../../SDK/components/utilities/include/sample_log.h"
 
 using namespace StackFlows;
@@ -187,7 +186,6 @@ class llm_tts : public StackFlow {
 
     void task_output(const std::shared_ptr<llm_task> llm_task_obj, const std::shared_ptr<llm_channel_obj> llm_channel,
                      const std::string &data, bool finish) {
-        // SLOGI("send:%s", data.c_str());
         std::string base64_data;
         int len = encode_base64(data, base64_data);
         if (llm_channel->enstream_) {
@@ -200,10 +198,8 @@ class llm_tts : public StackFlow {
                 data_body["delta"] = std::string("");
             data_body["finish"] = finish;
             if (finish) count = 0;
-            // SLOGI("send stream");
             llm_channel->send(llm_task_obj->response_format_, data_body, LLM_NO_ERROR);
         } else if (finish) {
-            // SLOGI("send utf-8");
             llm_channel->send(llm_task_obj->response_format_, base64_data, LLM_NO_ERROR);
         }
         if (llm_task_obj->response_format_.find("sys") != std::string::npos) {
@@ -220,16 +216,12 @@ class llm_tts : public StackFlow {
         while (i < len) {
             int next = 1;
             if ((input[i] & 0x80) == 0x00) {
-                // std::cout << "one character: " << input[i] << std::endl;
             } else if ((input[i] & 0xE0) == 0xC0) {
                 next = 2;
-                // std::cout << "two character: " << input.substr(i, next) << std::endl;
             } else if ((input[i] & 0xF0) == 0xE0) {
                 next = 3;
-                // std::cout << "three character: " << input.substr(i, next) << std::endl;
             } else if ((input[i] & 0xF8) == 0xF0) {
                 next = 4;
-                // std::cout << "four character: " << input.substr(i, next) << std::endl;
             }
             words.push_back(input.substr(i, next));
             i += next;
@@ -250,7 +242,6 @@ class llm_tts : public StackFlow {
         int ret;
         std::string tmp_msg1;
         if (enstream) {
-            // int index          = std::stoi(sample_json_str_get((*next_data), "index"));
             std::string finish = sample_json_str_get((*next_data), "finish");
             tmp_msg1           = sample_json_str_get((*next_data), "delta");
             finish_flage       = (finish == "true") ? true : false;
@@ -435,7 +426,6 @@ class llm_tts : public StackFlow {
 
     void taskinfo(const std::string &work_id, const std::string &object, const std::string &data) override {
         SLOGI("llm_tts::taskinfo:%s", data.c_str());
-        // int ret = 0;
         nlohmann::json req_body;
         int work_id_num = sample_get_work_id_num(work_id);
         if (WORK_ID_NONE == work_id_num) {

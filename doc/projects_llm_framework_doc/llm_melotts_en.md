@@ -96,7 +96,7 @@ Example:
 ```
 
 ## unlink
-Unlink
+Unlink.
 
 Send JSON:
 ```json
@@ -211,7 +211,7 @@ error::code being 0 indicates success.
 
 ## Task Information
 
-Get task list:
+Get task list.
 
 Send JSON:
 ```json
@@ -237,7 +237,7 @@ Response JSON:
 }
 ```
 
-Get task runtime parameters:
+Get task runtime parameters.
 
 Send JSON:
 ```json
@@ -268,5 +268,5 @@ Response JSON:
 }
 ```
 
-> **Note: work_id increases in the order of the unit's initialization registration and is not a fixed index value.**
+> **Note: work_id increases in the order of the unit's initialization registration and is not a fixed index value.**  
 > **The same type of unit cannot configure multiple units to work simultaneously, or unknown errors may occur. For example, tts and melo tts cannot be activated to work at the same time.**

@@ -72,45 +72,6 @@ int IsDnVqeEnabled(const AX_AP_DNVQE_ATTR_T *pstVqeAttr) {
 }
 
 AX_AUDIO_SAMPLE_CONFIG_t play_config;
-// AX_AUDIO_SAMPLE_CONFIG_t glob_config = {
-//     .stPoolConfig.MetaSize                   = 8192,
-//     .stPoolConfig.BlkSize                    = 32768,
-//     .stPoolConfig.BlkCnt                     = 37,
-//     .stPoolConfig.IsMergeMode                = AX_FALSE,
-//     .stPoolConfig.CacheMode                  = AX_POOL_CACHE_MODE_NONCACHE,
-//     .stPoolConfig.PartitionName              = "anonymous",
-//     .stAttr.enBitwidth                       = format,
-//     .stAttr.enSoundmode                      = (channel == 1 ? AX_AUDIO_SOUND_MODE_MONO : AX_AUDIO_SOUND_MODE_STEREO),
-//     .stAttr.u32ChnCnt                        = 2,
-//     .stAttr.enLinkMode                       = AX_UNLINK_MODE,
-//     .stAttr.enSamplerate                     = sample_rate,
-//     .stAttr.U32Depth                         = 30,
-//     .stAttr.u32PeriodSize                    = 160,
-//     .stAttr.u32PeriodCount                   = 8,
-//     .stAttr.bInsertSilence                   = 0,
-//     .stVqeAttr.s32SampleRate                 = sample_rate,
-//     .stVqeAttr.u32FrameSamples               = 160,
-//     .stVqeAttr.stNsCfg.bNsEnable             = AX_FALSE,
-//     .stVqeAttr.stNsCfg.enAggressivenessLevel = 2,
-//     .stVqeAttr.stAgcCfg.bAgcEnable           = AX_FALSE,
-//     .stVqeAttr.stAgcCfg.enAgcMode            = AX_AGC_MODE_FIXED_DIGITAL,
-//     .stVqeAttr.stAgcCfg.s16TargetLevel       = -3,
-//     .stVqeAttr.stAgcCfg.s16Gain              = 9,
-//     .stHpfAttr.bEnable                       = AX_FALSE,
-//     .stHpfAttr.s32GainDb                     = -3,
-//     .stHpfAttr.s32Samplerate                 = sample_rate,
-//     .stHpfAttr.s32Freq                       = 200,
-//     .stLpfAttr.bEnable                       = AX_FALSE,
-//     .stLpfAttr.s32GainDb                     = 0,
-//     .stLpfAttr.s32Samplerate                 = sample_rate,
-//     .stLpfAttr.s32Freq                       = 3000,
-//     .stEqAttr.bEnable                        = AX_FALSE,
-//     .stEqAttr.s32GainDb                      = {-10, -3, 3, 5, 10},
-//     .stEqAttr.s32Samplerate                  = sample_rate,
-//     .gResample                               = 0,
-//     .enInSampleRate                          = AX_AUDIO_SAMPLE_RATE_16000,
-//     .gInstant                                = 0,
-//     .gInsertSilence                          = 0};
 void ax_play(unsigned int card, unsigned int device, float Volume, int channel, int rate, int bit, const void *data,
              int size) {
     gplayLoopExit               = 0;
@@ -312,45 +273,6 @@ int ax_play_status() {
 }
 
 AX_AUDIO_SAMPLE_CONFIG_t cap_config;
-// AX_AUDIO_SAMPLE_CONFIG_t glob_config = {
-//     .stPoolConfig.MetaSize                     = 8192,
-//     .stPoolConfig.BlkSize                      = 7680,
-//     .stPoolConfig.BlkCnt                       = 33,
-//     .stPoolConfig.IsMergeMode                  = AX_FALSE,
-//     .stPoolConfig.CacheMode                    = AX_POOL_CACHE_MODE_NONCACHE,
-//     .stPoolConfig.PartitionName                = "anonymous",
-//     .aistAttr.enBitwidth                       = format,
-//     .aistAttr.enLinkMode                       = AX_UNLINK_MODE,
-//     .aistAttr.enSamplerate                     = rate,
-//     .aistAttr.enLayoutMode                     = AX_AI_REF_MIC,
-//     .aistAttr.U32Depth                         = 30,
-//     .aistAttr.u32PeriodSize                    = 160,
-//     .aistAttr.u32PeriodCount                   = 8,
-//     .aistAttr.u32ChnCnt                        = channel,
-//     .aistVqeAttr.s32SampleRate                 = rate,
-//     .aistVqeAttr.u32FrameSamples               = 160,
-//     .aistVqeAttr.stNsCfg.bNsEnable             = AX_TRUE,
-//     .aistVqeAttr.stNsCfg.enAggressivenessLevel = 2,
-//     .aistVqeAttr.stAgcCfg.bAgcEnable           = AX_FALSE,
-//     .aistVqeAttr.stAgcCfg.enAgcMode            = AX_AGC_MODE_FIXED_DIGITAL,
-//     .aistVqeAttr.stAgcCfg.s16TargetLevel       = -3,
-//     .aistVqeAttr.stAgcCfg.s16Gain              = 9,
-//     .aistVqeAttr.stAecCfg.enAecMode            = AX_AEC_MODE_FIXED,
-//     .stHpfAttr.bEnable                         = AX_FALSE,
-//     .stHpfAttr.s32GainDb                       = -3,
-//     .stHpfAttr.s32Samplerate                   = rate,
-//     .stHpfAttr.s32Freq                         = 200,
-//     .stLpfAttr.bEnable                         = AX_FALSE,
-//     .stLpfAttr.s32GainDb                       = 0,
-//     .stLpfAttr.s32Samplerate                   = rate,
-//     .stLpfAttr.s32Freq                         = 3000,
-//     .stEqAttr.bEnable                          = AX_FALSE,
-//     .stEqAttr.s32GainDb                        = {-10, -3, 3, 5, 10},
-//     .stEqAttr.s32Samplerate                    = rate,
-//     .gResample                                 = 0,
-//     .enOutSampleRate                           = AX_AUDIO_SAMPLE_RATE_16000,
-//     .gDbDetection                              = 0,
-// };
 void ax_cap_start(unsigned int card, unsigned int device, float Volume, int channel, int rate, int bit,
                   AUDIOCallback callback) {
     int ret;
@@ -468,8 +390,6 @@ void ax_cap_start(unsigned int card, unsigned int device, float Volume, int chan
                 break;
             }
             getNumber++;
-            // audio todo:
-            // CALC_FPS("audio sample");
             callback(stFrame.u64VirAddr, stFrame.u32Len);
             totalFrames += stFrame.u32Len / 2;
             ret = AX_AI_ReleaseFrame(card, device, &stFrame);
