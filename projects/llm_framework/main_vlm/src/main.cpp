@@ -201,6 +201,12 @@ class llm_task {
                 std::string out = lLaMa_->Run(prompt_data_);
                 if (out_callback_) out_callback_(out, true);
             } else {
+                if (image_data_.size() > 2 && image_data_[0] == 0xFF && image_data_[1] == 0xD8 &&
+                    image_data_[image_data_.size() - 2] == 0xFF && image_data_[image_data_.size() - 1] == 0xD9) {
+                } else {
+                    SLOGE("Invalid JPEG data.");
+                    return;
+                }
                 cv::Mat src = cv::imdecode(image_data_, cv::IMREAD_COLOR);
                 image_data_.clear();
                 lLaMa_->Encode(src, img_embed);
