@@ -122,7 +122,7 @@ class llm_task {
                     pid_t pid = fork();
                     if (pid == 0) {
                         execl("/usr/bin/python3", "python3",
-                            ("/opt/m5stack/scripts/" + model_ + "_tokenizer.py").c_str(),
+                            ("/opt/m5stack/share/" + model_ + "_tokenizer.py").c_str(),
                             "--host", "localhost",
                             "--port", std::to_string(port_).c_str(),
                             // "--model_id", (base_model + "tokenizer").c_str(),
