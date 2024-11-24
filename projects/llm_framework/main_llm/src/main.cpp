@@ -125,7 +125,7 @@ class llm_task {
                             ("/opt/m5stack/scripts/" + model_ + "_tokenizer.py").c_str(),
                             "--host", "localhost",
                             "--port", std::to_string(port_).c_str(),
-                            "--model_id", (base_model + "tokenizer").c_str(),
+                            // "--model_id", (base_model + "tokenizer").c_str(),
                             "--content", ("'" + prompt_ + "'").c_str(),
                             nullptr);
                         perror("execl failed");
