@@ -45,7 +45,7 @@ class llm_task {
     task_callback_t out_callback_;
     bool enoutput_;
     bool enstream_;
-    std::atomic_bool tokenizer_server_flage_;
+    std::atomic_bool tokenizer_server_flage_ = false;
     unsigned int port_ = 8080;
 
     void set_output(task_callback_t out_callback) {
