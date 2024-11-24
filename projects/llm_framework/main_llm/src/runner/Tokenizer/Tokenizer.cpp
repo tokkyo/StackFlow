@@ -330,26 +330,34 @@ public:
             cli->set_write_timeout(1);
             {
                 auto ret = cli->Get("/bos_id");
-                auto rep = ret.value();
-                if (rep.status != 200)
-                {
-                    ALOGE("get bos_id failed, status: %d", rep.status);
-                    return false;
+                if(ret){
+                    auto rep = ret.value();
+                    if (rep.status != 200)
+                    {
+                        return false;
+                    }
+                    nlohmann::json j = nlohmann::json::parse(rep.body);
+                    bos_id = j["bos_id"];
+                }else{
+                    auto err = ret.error();
+                    ALOGI("Tokenizer_Http Get err: %s", httplib::to_string(err).c_str());
                 }
-                nlohmann::json j = nlohmann::json::parse(rep.body);
-                bos_id = j["bos_id"];
             }
 
             {
                 auto ret = cli->Get("/eos_id");
-                auto rep = ret.value();
-                if (rep.status != 200)
-                {
-                    ALOGE("get eos_id failed, status: %d", rep.status);
-                    return false;
+                if(ret){
+                    auto rep = ret.value();
+                    if (rep.status != 200)
+                    {
+                        return false;
+                    }
+                    nlohmann::json j = nlohmann::json::parse(rep.body);
+                    eos_id = j["eos_id"];
+                }else{
+                    auto err = ret.error();
+                    ALOGI("Tokenizer_Http Get err: %s", httplib::to_string(err).c_str());
                 }
-                nlohmann::json j = nlohmann::json::parse(rep.body);
-                eos_id = j["eos_id"];
             }
             printf("bos_id: %d, eos_id: %d\n", bos_id, eos_id);
         }
